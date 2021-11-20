@@ -1,3 +1,3 @@
-# html-form
+# Simple Login Form
 
-simple html form validation using jquery with bootstrap 
+Simple login form validation using jquery with bootstrap 
