@@ -20,7 +20,9 @@
     </style>
 
     <script>
-        $(document).ready(() => {
+
+        // Jquery
+        /*$(document).ready(() => {
 
             $('#loginForm').submit(() => {
 
@@ -38,7 +40,39 @@
 
                 return true;
             });
+        });*/
+
+        // After the page is loaded
+        window.addEventListener('load', function () {
+
+            // when the form is submitted (via <button type="submit">)
+            document.querySelector('form#loginForm').addEventListener('submit', function (event) {
+
+                // Get the Elements from the DOM
+                const loginAlert = document.querySelector('#loginAlert');
+                const emailInput = document.querySelector('#emailInput');
+                // can use optional input in selector
+                const passwordInput = document.querySelector('input#passwordInput');
+
+                if (emailInput.value.trim().length === 0 || passwordInput.value.trim().length === 0) {
+
+                    // remove display none class
+                    loginAlert.classList.remove('d-none');
+
+                    if (emailInput.value.trim().length === 0 && passwordInput.value.trim().length === 0) {
+                        loginAlert.innerHTML = 'Please enter email and password'
+                    } else if (emailInput.value.trim().length === 0) {
+                        loginAlert.innerHTML = 'Please enter email';
+                    } else if (passwordInput.value.trim().length === 0) {
+                        loginAlert.innerHTML = 'Please enter password';
+                    }
+
+                    // cancel submission
+                    event.preventDefault();
+                }
+            });
         });
+
     </script>
 </head>
 <body>
@@ -50,7 +84,7 @@
     <div class="form-group my-3">
         <label for="emailInput">Email address</label>
         <input aria-describedby="emailHelp" class="form-control" id="emailInput" placeholder="Enter email"
-               type="email">
+               type="text">
         <small class="form-text text-muted" id="emailHelp">We'll never share your email with anyone else.</small>
     </div>
 
@@ -60,13 +94,11 @@
     </div>
 
     <div class="alert alert-danger my-3 d-none" id="loginAlert" role="alert">
-        Please enter login credentials
     </div>
 
     <div class="button-group my-3">
         <button class="btn btn-primary" type="submit">Login</button>
     </div>
 </form>
-
 </body>
 </html>
